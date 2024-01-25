@@ -2,7 +2,16 @@ import platform
 import sys
 import os
 from PyQt6.QtCore import QSize, Qt
-from PyQt6.QtWidgets import QGridLayout, QHBoxLayout, QTabWidget, QApplication, QMainWindow, QWidget, QPushButton
+from PyQt6.QtWidgets import(
+    QGridLayout, 
+    QHBoxLayout,
+    QTabWidget,
+    QApplication,
+    QMainWindow,
+    QWidget, 
+    QPushButton
+    )
+
 import json
 
 
@@ -19,27 +28,39 @@ class Window(QMainWindow):
         self.setWindowTitle('Weatherboy')
         self.setFixedSize(QSize(600,400))
         
-        main_layout = QGridLayout(self)
-        self.setLayout(main_layout)
-        
+        mainLayout = QGridLayout(self)
+        self.setLayout(mainLayout)
+        mainLayout.setSpacing(20)
         #init tab widget
-        tab = QTabWidget(self)
+        tabs = QTabWidget(self)
 
         #1 day forecast tab
         oneDay = QWidget(self)
         oneDayLayout = QGridLayout()
+        oneDay.setLayout(oneDayLayout)
         
 
         #5 day forecast tab
+        fiveDay = QWidget(self)
         fiveDayLayout = QHBoxLayout()
-
+        fiveDay.setLayout(fiveDayLayout)
 
         #settings tab
+        settings = QWidget(self)
         settingsLayout = QGridLayout()
+        settings.setLayout(settingsLayout)
 
+        #add the three tabs
+        tabs.addTab(oneDay, "Today")
+        tabs.addTab(fiveDay, "5 day forecast")
+        tabs.addTab(settings, "Settings")
 
         #tab placement
-        main_layout.addWidget(tab, 0, 3, 2, 1)
+        tabs.setTabPosition(QTabWidget.TabPosition.North)
+        self.setCentralWidget(tabs)
+        tabs.setMovable(False)
+        #mainLayout.addWidget(tabs, 1, 2, alignment=Qt.AlignmentFlag.AlignCenter)
+        
 
 
             
