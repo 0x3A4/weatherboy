@@ -1,12 +1,11 @@
 import platform
-import sys
 import os
 import requests
 import tempfile
 import json
 from functools import cached_property
 from PyQt6.QtCore import QSize, Qt, QObject, pyqtSignal, QUrl
-from PyQt6.QtGui import QPixmap, QImage
+from PyQt6.QtGui import QPixmap, QImage, QIcon
 from PyQt6.QtNetwork import QNetworkAccessManager, QNetworkReply, QNetworkRequest
 from PyQt6.QtWidgets import(
     QGridLayout, 
@@ -25,7 +24,7 @@ from PyQt6.QtWidgets import(
 
 
 #def urlGen(iconCode, scale):
-#    string = "https://openweathermap.org/img/wn/" + iconCode + "@" + scale + "x.png"
+#    string = "http://openweathermap.org/img/wn/" + iconCode + "@" + scale + "x.png"
 #    return string
 
 
@@ -66,6 +65,9 @@ class Window(QMainWindow):
         self.setFixedSize(QSize(640,480))
         mainLayout = QGridLayout(self)
         self.setLayout(mainLayout)
+        icon = QIcon()
+        icon.addFile('icon.png')
+        self.setWindowIcon(icon)
         mainLayout.setSpacing(20)
 
 
@@ -143,14 +145,13 @@ class Window(QMainWindow):
         self.dayOnePNG.setPixmap(pixmap)
 
     def download(self):
-        url = QUrl('http://openweathermap.org/img/wn/01d@2x.png')
+        url = QUrl('http://openweathermap.org/img/wn/10d@2x.png')
         self.downloader.start_download(url)
          
 
 
-app = QApplication(sys.argv)
-w = Window()
-w.show()
-
-app.exec()
+#app = QApplication(sys.argv)
+#w = Window()
+#w.show()
+#app.exec()
 
